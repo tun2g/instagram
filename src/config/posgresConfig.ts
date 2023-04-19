@@ -5,4 +5,6 @@ export const postgresConfig=
     password: 'ntt24082002',
     user: 'postgres',
     port: 5432,
+    entities: ["src/**/*.entity.ts"],
+    synchronize: true
 }   

@@ -27,7 +27,7 @@ export class UserService {
         try {
             
             const users = await this.pg.query('SELECT * FROM users');
-            return users.rows[users.rows.length-1].userid;
+            return users.rows[users.rows.length-1]?.userid;
         } catch (error) {
             console.log(error)
         }       
@@ -72,6 +72,19 @@ export class UserService {
             return user.rows
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    public async findUserByName(username:string):Promise<any>{
+        try {
+            
+            const user=await this.pg.query(
+                `SELECT * FROM users WHERE username = $1`,
+                [username]
+            )
+            return user.rows
+        } catch (error) {
+            
         }
     }
     

@@ -1,8 +1,8 @@
 ### GET request to retrieve all users
 GET http://localhost:3333/users
 
-### POST request to create a new user
-POST http://localhost:3333/user/create
+### POST request to create a new user (register)
+POST http://localhost:3333/user/register
 Content-Type: application/json
 
 {
@@ -11,7 +11,31 @@ Content-Type: application/json
   "password":"123456"
 }
 
-### 
+### delete user by id
 DELETE  http://localhost:3333/user/delete/1
+
+### POST request to login
+POST http://localhost:3333/user/login
+Content-Type: application/json
+
+{
+  "username": "tun2g",
+  "password":"123456"
+}
+
+
+###
+GET http://localhost:3333/user/get/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlhdCI6MTY4MTkxNTYzOCwiZXhwIjoxNjgxOTE3NDM4fQ.Ps-4BuXj0QzMx4opR0hpdaroc9j7Zwuf_qpsx6pAXzM
+
+###
+GET http://localhost:3333/jwt/refresh
+Content-Type: application/json
+
+{
+  "userid":1,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInJlZnJlc2hUb2tlbiI6Ik5UVDI0MDgyMDAyIiwiaWF0IjoxNjgxOTE4MjMxLCJleHAiOjE2ODQ1MTAyMzF9.Tg68I2KFr9CBY9o6eiFVm6QETHmGpqH5H-nM847N_bA"
+}
+
 
 

@@ -1,18 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
-export class User {
+export class Jwt {
   @PrimaryGeneratedColumn()
   userid: number;
 
   @Column()
-  username: string;
-
-  @Column()
-  password: string;
-
-  @Column()
-  fullname: string;
-
+  refreshtoken: string;
 
 }

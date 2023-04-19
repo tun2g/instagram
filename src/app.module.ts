@@ -5,13 +5,15 @@ import { UserModule } from './modules/user/user.module';
 import { PostModule } from './modules/post/post.module';
 import { PostgresModule } from 'nest-postgres';
 import { postgresConfig } from './config/posgresConfig';
+import { JwtModule } from './modules/jwt/jwt.module';
+import { JwtService } from './modules/jwt/jwt.service';
 
 
 @Module({
   imports: [
     PostgresModule.forRoot(postgresConfig),
-    UserModule, PostModule],
+    UserModule, PostModule, JwtModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtService],
 })
 export class AppModule {}

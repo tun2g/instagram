@@ -1,8 +1,9 @@
-import {  Controller,Delete,Get, Post, Req, Res } from '@nestjs/common';
+import {  Controller,Delete,Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post-dto';
 import { Request,Response } from 'express';
 import { Posts } from './post.entity';
+import { PersonalJwtAuthGuard } from 'src/services/personaljwtauth.guard';
 
 @Controller('post')
 export class PostController {
@@ -22,7 +23,7 @@ export class PostController {
             console.log(error)
         }
     }
-    
+
     @Post('create')
     async createPost(@Req() req:Request,@Res() res:Response){
         try {
@@ -47,11 +48,12 @@ export class PostController {
         
     }
 
+
+    @UseGuards(PersonalJwtAuthGuard)
     @Get('get/:id')
     async getPostsByUser(@Req() req:Request,@Res() res:Response){
         try {
             const userid:number=parseInt(req.params.id)
-            console.log(userid)
             const list =  await this.postService.getPostsByUser(userid)
             res.json({list})
         } catch (error) {

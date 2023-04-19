@@ -63,9 +63,32 @@ Content-Type: application/json
 {
   "postid":1,
   "userid": 1,
-  "content":"Regular exercise has numerous benefits for both physical and mental health. Engaging in physical activity on a consistent basis can improve cardiovascular health, increase muscle strength and flexibility, and even reduce the risk of chronic diseases such as diabetes and heart disease. Additionally, exercise has been shown to have a positive impact on mental health by reducing symptoms of anxiety and depression, improving mood, and promoting better sleep. Incorporating regular exercise into one's daily routine can lead to an overall improvement in well-being and quality of life.",
-  "title":"The Benefits"
+  "content":"Time management is a crucial skill that can greatly impact one's personal and professional life. Effective time management involves setting goals, prioritizing tasks, and allocating time appropriately to ensure that important deadlines are met. Those who are skilled in time management are able to balance their work and personal responsibilities more effectively, leading to reduced stress levels and increased productivity. Additionally, effective time management allows individuals to take advantage of opportunities as they arise, as they have the ability to manage their time efficiently. Ultimately, mastering time management can lead to a more fulfilling and successful life.",
+  "title":"The Importance of Time Management"
 }
+
+### POST request to create new comment on post
+POST http://localhost:3333/comment/create
+Content-Type: application/json
+
+{
+  "userid": 1,
+  "postid": 2,
+  "content":"Bài viết hay quá!"
+}
+
+
+### POST request to create new comment on post
+POST http://localhost:3333/comment/update
+Content-Type: application/json
+
+{
+  "commentid":1,
+  "userid": 1,
+  "postid": 2,
+  "content":"Cảm ơn đã chia sẻ!"
+}
+
 
 
 

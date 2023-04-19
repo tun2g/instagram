@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import { UserService } from './user.service';
+import { Request,Response } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -8,8 +9,20 @@ export class UserController {
     ){
 
     }
+
     @Get()
-    async getListUsers(){
-        return await this.userService.getListUsers()
+    async findAll(@Req() req:Request,@Res() res:Response){
+        try {
+
+            const users =  await this.userService.findAll()
+            res.json({users})
+        } catch (error) {
+            console.log(error)
+            res.json({err:"database error"})
+        }
     }
+
+    
+
+
 }

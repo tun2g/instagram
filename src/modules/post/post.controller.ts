@@ -16,9 +16,8 @@ export class PostController {
     }
     
     @Post('create')
-    async createPost(
-        @Body() data:CreatePostDto
-    ){
+    async createPost(@Body() data:CreatePostDto)
+    {
         return this.postService.createPost(data)
     }
 }

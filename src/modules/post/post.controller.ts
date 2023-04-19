@@ -1,6 +1,8 @@
-import { Body, Controller,Get, Post } from '@nestjs/common';
+import {  Controller,Delete,Get, Post, Req, Res } from '@nestjs/common';
 import { PostService } from './post.service';
 import { CreatePostDto } from './dto/create-post-dto';
+import { Request,Response } from 'express';
+import { Posts } from './post.entity';
 
 @Controller('post')
 export class PostController {
@@ -10,14 +12,60 @@ export class PostController {
 
     }
 
-    @Get()
-    async getListPosts(){
-        return await this.postService.getListPosts()
+    @Get('all')
+    async getListPosts(@Req() req:Request,@Res() res:Response){
+        try {
+
+            const list =await this.postService.getAllPosts()
+            res.json({list})
+        } catch (error) {
+            console.log(error)
+        }
     }
     
     @Post('create')
-    async createPost(@Body() data:CreatePostDto)
-    {
-        return this.postService.createPost(data)
+    async createPost(@Req() req:Request,@Res() res:Response){
+        try {
+
+            const reqBody:CreatePostDto=req.body
+            await this.postService.createPost(reqBody)
+            res.json({"message":"create successfully"})
+        } catch (error) {
+           console.log(error) 
+        }
+    }
+
+    @Post('update')
+    async updatePost(@Req() req:Request,@Res() res:Response){
+        try {
+            const reqBody:Posts=req.body
+            await this.postService.updatePost(reqBody)
+            res.json({"message": "update successfully"})
+        } catch (error) {
+            
+        }
+        
+    }
+
+    @Get('get/:id')
+    async getPostsByUser(@Req() req:Request,@Res() res:Response){
+        try {
+            const userid:number=parseInt(req.params.id)
+            console.log(userid)
+            const list =  await this.postService.getPostsByUser(userid)
+            res.json({list})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    @Delete('delete')
+    async deletePost(@Req() req:Request,@Res() res:Response){
+        try {
+            const postid:number=req.body.postid
+            await this.postService.deletePost(postid)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

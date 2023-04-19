@@ -46,7 +46,26 @@ Content-Type: application/json
 }
 
 
+### POST request to create new post
+POST http://localhost:3333/post/create
+Content-Type: application/json
 
+{
+  "userid": 1,
+  "content":"Regular exercise has numerous benefits for both physical and mental health. Engaging in physical activity on a consistent basis can improve cardiovascular health, increase muscle strength and flexibility, and even reduce the risk of chronic diseases such as diabetes and heart disease. Additionally, exercise has been shown to have a positive impact on mental health by reducing symptoms of anxiety and depression, improving mood, and promoting better sleep. Incorporating regular exercise into one's daily routine can lead to an overall improvement in well-being and quality of life.",
+  "title":"The Benefits of Regular Exercise"
+}
+
+### POST request to update post
+POST http://localhost:3333/post/update
+Content-Type: application/json
+
+{
+  "postid":1,
+  "userid": 1,
+  "content":"Regular exercise has numerous benefits for both physical and mental health. Engaging in physical activity on a consistent basis can improve cardiovascular health, increase muscle strength and flexibility, and even reduce the risk of chronic diseases such as diabetes and heart disease. Additionally, exercise has been shown to have a positive impact on mental health by reducing symptoms of anxiety and depression, improving mood, and promoting better sleep. Incorporating regular exercise into one's daily routine can lead to an overall improvement in well-being and quality of life.",
+  "title":"The Benefits"
+}
 
 
 

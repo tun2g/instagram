@@ -1,19 +1,16 @@
 import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
-export class Post {
+export class Posts {
   @PrimaryGeneratedColumn()
   postid: number;
 
   @Column()
-  userid: string;
+  userid: number;
 
   @Column()
   title: string;
 
   @Column()
-  content: string;
-  
-  
-
+  content: string;  
 }

@@ -7,12 +7,14 @@ import { PostgresModule } from 'nest-postgres';
 import { postgresConfig } from './config/posgresConfig';
 import { JwtModule } from './modules/jwt/jwt.module';
 import { JwtService } from './modules/jwt/jwt.service';
+import { CommentModule } from './modules/comment/comment.module';
+import { LikeModule } from './modules/like/like.module';
 
 
 @Module({
   imports: [
     PostgresModule.forRoot(postgresConfig),
-    UserModule, PostModule, JwtModule],
+    UserModule, PostModule, JwtModule, CommentModule, LikeModule],
   controllers: [AppController],
   providers: [AppService, JwtService],
 })

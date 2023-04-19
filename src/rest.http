@@ -37,5 +37,16 @@ Content-Type: application/json
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInJlZnJlc2hUb2tlbiI6Ik5UVDI0MDgyMDAyIiwiaWF0IjoxNjgxOTE4MjMxLCJleHAiOjE2ODQ1MTAyMzF9.Tg68I2KFr9CBY9o6eiFVm6QETHmGpqH5H-nM847N_bA"
 }
 
+### log out
+GET http://localhost:3333/user/logout
+Content-Type: application/json
+
+{
+  "userid":1
+}
+
+
+
+
 
 

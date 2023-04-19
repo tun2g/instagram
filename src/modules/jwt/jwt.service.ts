@@ -37,12 +37,33 @@ export class JwtService {
     }
 
     async getAll(){
-        const lists=await this.pg.query('SELECT * FROM refreshtokens')
-        return lists.rows
+        try {
+            
+            const lists=await this.pg.query('SELECT * FROM refreshtokens')
+            return lists.rows
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async getRefreshTokenByUserid(userid:number){
-        const users = await this.pg.query('SELECT * FROM refreshtokens WHERE userid = $1',[userid]);
-        return users.rows[0].refreshtoken   
+        try {
+            
+            const users = await this.pg.query('SELECT * FROM refreshtokens WHERE userid = $1',[userid]);
+            return users.rows[0].refreshtoken   
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async deleteToken(userid:number){
+        try {
+            await this.pg.query(
+                `DELETE FROM refreshtokens WHERE userid=$1`,
+                [userid]
+            ) 
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

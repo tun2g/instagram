@@ -154,4 +154,15 @@ export class UserController {
         }
     }
 
+    @Get('logout')
+    async logOut(@Req() req:Request, @Res() res:Response){
+        try {
+            const userid=req.body.userid
+            await this.jwtService.deleteToken(userid)
+            res.json({message:"logout"})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }

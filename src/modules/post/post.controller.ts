@@ -4,14 +4,13 @@ import { CreatePostDto } from './dto/create-post-dto';
 import { Request,Response } from 'express';
 import { Posts } from './post.entity';
 import { PersonalJwtAuthGuard } from 'src/services/personaljwtauth.guard';
+import { BaseController } from '../base/base.controller';
 
 @Controller('post')
-export class PostController {
-    constructor(
-        private postService: PostService
-    ){
-
-    }
+export class PostController extends BaseController<CreatePostDto>{
+    constructor(private readonly postService: PostService) {
+        super(postService);
+      }
 
     @Get('all')
     async getListPosts(@Req() req:Request,@Res() res:Response){
@@ -24,29 +23,6 @@ export class PostController {
         }
     }
 
-    @Post('create')
-    async createPost(@Req() req:Request,@Res() res:Response){
-        try {
-
-            const reqBody:CreatePostDto=req.body
-            await this.postService.createPost(reqBody)
-            res.json({"message":"create successfully"})
-        } catch (error) {
-           console.log(error) 
-        }
-    }
-
-    @Post('update')
-    async updatePost(@Req() req:Request,@Res() res:Response){
-        try {
-            const reqBody:Posts=req.body
-            await this.postService.updatePost(reqBody)
-            res.json({"message": "update successfully"})
-        } catch (error) {
-            
-        }
-        
-    }
 
 
     @UseGuards(PersonalJwtAuthGuard)
@@ -61,13 +37,4 @@ export class PostController {
         }
     }
 
-    @Delete('delete')
-    async deletePost(@Req() req:Request,@Res() res:Response){
-        try {
-            const postid:number=req.body.postid
-            await this.postService.deletePost(postid)
-        } catch (error) {
-            console.log(error)
-        }
-    }
 }

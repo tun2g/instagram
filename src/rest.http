@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
   "userid":1,
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsInJlZnJlc2hUb2tlbiI6Ik5UVDI0MDgyMDAyIiwiaWF0IjoxNjgxOTE4MjMxLCJleHAiOjE2ODQ1MTAyMzF9.Tg68I2KFr9CBY9o6eiFVm6QETHmGpqH5H-nM847N_bA"
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlhdCI6MTY4MTk4NTQyOCwiZXhwIjoxNjg0NTc3NDI4fQ.dRHpCjvWDCSyNz5lvagCnL91uQmSnJxWyHvIrIIq8qQ"
 }
 
 ### log out
@@ -86,7 +86,7 @@ Content-Type: application/json
   "commentid":1,
   "userid": 1,
   "postid": 2,
-  "content":"Cảm ơn đã chia sẻ!"
+  "content":"Cảm ơn bạn đã chia sẻ!"
 }
 
 ### POST request to like a post

@@ -15,8 +15,7 @@ export class AuthService {
 
   async genarateRefreshToken(userid:number){
     const payload = { 
-        userid,
-        refreshToken:process.env.JWT_REFRESH_KEY,    
+        userid
     };
     return {
       refreshToken: jwtService.sign(payload,process.env.JWT_REFRESH_KEY,{expiresIn:60*60*24*30})

@@ -16,7 +16,6 @@ export class JwtAuthGuard implements CanActivate {
     try {
       const decoded = jwt.verify(token, process.env.JWT_ACCESS_KEY);
       request.user = decoded;
-
       return true;
     } catch (err) {
       return false;

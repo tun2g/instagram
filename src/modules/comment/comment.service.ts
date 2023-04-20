@@ -23,7 +23,7 @@ export class CommentService {
             console.log(error)
         }       
 }
-    async createComment(data:CreateCommentDto){
+    async create(data:CreateCommentDto){
         try {
             let newComment:Comment={...data,commentid:1}
 
@@ -43,7 +43,7 @@ export class CommentService {
         }
     }
 
-    async updateComment(comment:Comment){
+    async update(comment:Comment){
         try {
             await this.pg.query(
                 `UPDATE comments SET content= $1 WHERE commentid = $2;`,
@@ -65,7 +65,7 @@ export class CommentService {
         }
     }
 
-    async deleteComment(commentid:number){
+    async delete(commentid:number){
         try {
             await this.pg.query(
                 `DELETE FROM comments WHERE commentid=$1`,

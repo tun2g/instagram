@@ -2,6 +2,8 @@ import { Controller, Get, Req, Res} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { JwtService } from './jwt.service';
 import { AuthService } from 'src/services/auth.service';
+import * as jwt from 'jsonwebtoken';
+
 @Controller('jwt')
 export class JwtController {
     constructor(
@@ -15,8 +17,17 @@ export class JwtController {
         const {userid,refreshToken} = req.body
         const refreshTokenDB=await this.jwtService.getRefreshTokenByUserid(userid)
         if(refreshToken===refreshTokenDB){
-            const newAccessToken= await this.authService.genarateAccessToken(userid)
-            res.json({accessToken:newAccessToken})
+            try {
+                const decoded=jwt.verify(refreshToken,process.env.JWT_REFRESH_KEY) 
+
+                const newAccessToken= await this.authService.genarateAccessToken(userid)
+                res.json({accessToken:newAccessToken})
+
+            } catch (error) {
+                console.log(error)
+                res.json({message:"Token has expired"})
+            }
+            
         }
         else {
             res.json({message:"Invalid token"})
@@ -29,7 +40,7 @@ export class JwtController {
         const lists= await this.jwtService.getAll()
         res.json({lists})        
     } catch (error) {
-        
+     console.log(error)   
     }
 
    }

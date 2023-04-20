@@ -35,7 +35,7 @@ export class PostService {
             }       
     }
 
-    async createPost(data:CreatePostDto){
+    async create(data:CreatePostDto){
        try {
 
         const newPost:Posts= {...data,postid:1}
@@ -56,7 +56,7 @@ export class PostService {
        } 
     }
 
-    async updatePost(data:Posts){
+    async update(data:Posts){
         try {
             await this.pg.query(
                 `UPDATE posts SET title = $1,content= $2 WHERE postid = $3;`,
@@ -78,7 +78,7 @@ export class PostService {
         }
     }
 
-    async deletePost(postid:number){
+    async delete(postid:number){
         try {
             await this.pg.query(
                 `DELETE FROM posts WHERE postid=$1`,

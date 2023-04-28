@@ -1,5 +1,5 @@
 export class CreatePostDto {
-    content:string
-    title:string
+    description:string
+    imageurl:string
     userid:number
 }

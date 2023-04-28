@@ -47,8 +47,8 @@ export class PostService {
         newPost.postid=maxId+1
 
          await this.pg.query(
-            'INSERT INTO posts (userid,postid,content,title)  VALUES ($1, $2,$3,$4) RETURNING *',
-            [newPost.userid,newPost.postid,newPost.content,newPost.title]
+            'INSERT INTO posts (userid,postid,description,imageurl)  VALUES ($1, $2,$3,$4) RETURNING *',
+            [newPost.userid,newPost.postid,newPost.description,newPost.imageurl]
          )
          
        } catch (error) {
@@ -59,8 +59,8 @@ export class PostService {
     async update(data:Posts){
         try {
             await this.pg.query(
-                `UPDATE posts SET title = $1,content= $2 WHERE postid = $3;`,
-                [data.title, data.content,data.postid],
+                `UPDATE posts SET description = $1,imageurl= $2 WHERE postid = $3;`,
+                [data.description, data.imageurl,data.postid],
             );
         } catch (error) {
             console.log(error);

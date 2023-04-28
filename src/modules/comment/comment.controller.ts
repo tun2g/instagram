@@ -1,16 +1,18 @@
-import { Controller, Get, Post, Req, Res,Delete } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { Request, Response } from 'express';
 import { CreateCommentDto } from './dto/create-comment-dto';
-import { Comment } from './comment.entity';
 import { BaseController } from '../base/base.controller';
+import { ApiTags,ApiOperation } from '@nestjs/swagger';
 
+@ApiTags('comment')
 @Controller('comment')
 export class CommentController extends BaseController<CreateCommentDto>{
     constructor(private readonly commentService: CommentService) {
         super(commentService);
       }
-
+    
+    @ApiOperation({ summary: 'Get all comments in a post' })
     @Get('get/:id')
     async getCommentsByPost(@Req() req:Request,@Res() res:Response){
         try {

@@ -3,7 +3,6 @@ import { InjectClient } from 'nest-postgres';
 import { Client } from 'pg';
 import { CreateCommentDto } from './dto/create-comment-dto';
 import { Comment } from './comment.entity';
-import { clearConfigCache } from 'prettier';
 
 @Injectable()
 export class CommentService {

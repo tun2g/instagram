@@ -3,7 +3,9 @@ import { Request, Response } from 'express';
 import { JwtService } from './jwt.service';
 import { AuthService } from 'src/services/auth.service';
 import * as jwt from 'jsonwebtoken';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('json web token')
 @Controller('jwt')
 export class JwtController {
     constructor(
@@ -12,6 +14,8 @@ export class JwtController {
     ){
 
     }
+
+    @ApiOperation({summary:"request refresh access-token by refresh-token"})
     @Get('refresh')
    async refreshAccessToken(@Req() req:Request,@Res()  res:Response){
         const {userid,refreshToken} = req.body

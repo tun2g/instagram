@@ -8,9 +8,11 @@ import { AuthService } from 'src/services/auth.service';
 import { PersonalJwtAuthGuard } from 'src/services/personaljwtauth.guard';
 import { JwtService } from '../jwt/jwt.service';
 import { Jwt } from '../jwt/jwt.entity';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 const bcrypt=require('bcrypt')
 
+@ApiTags('user')
 @Controller('user')
 export class UserController {
     constructor(
@@ -21,6 +23,7 @@ export class UserController {
 
     }
 
+    @ApiOperation({summary:"get all users"})
     @Get()
     async findAll(@Req() req:Request,@Res() res:Response){
         try {       
@@ -32,6 +35,7 @@ export class UserController {
         }
     }
 
+    @ApiOperation({summary:"get userid of the last user in database"})
     @Get('max-id')
     async getMaxId(@Res() res:Response){
         try {
@@ -42,6 +46,7 @@ export class UserController {
         }
     }
 
+    @ApiOperation({summary:"register user account"})
     @Post('register')
     async register(@Req() req:Request, @Res() res:Response){
         try {
@@ -57,6 +62,7 @@ export class UserController {
                 const salt=await bcrypt.genSalt(10)
                 const hashedPassword=await bcrypt.hash(newUser.password,salt)
                 newUser.password=hashedPassword
+
                 await this.userService.createUser(newUser)
                 res.json({"status":500,"message":"create successfully"})
             }
@@ -69,6 +75,7 @@ export class UserController {
 
 
     // update password
+    @ApiOperation({summary:"update password"})
     @Post('update')
     async updateUser(@Req() req:Request,@Res() res:Response){
         try {
@@ -82,6 +89,7 @@ export class UserController {
         }
     }
 
+    @ApiOperation({summary:"get a user account by userid"})
     @UseGuards(PersonalJwtAuthGuard)
     @Get('get/:id')
     async getUserById(@Req() req:Request, @Res() res:Response){
@@ -115,6 +123,7 @@ export class UserController {
         }
     }
 
+    @ApiOperation({summary:"Login"})
     @Post('login')
     async login(@Req() req:Request, @Res() res:Response){
         try {
@@ -139,7 +148,7 @@ export class UserController {
                     console.log(accessToken)
                     console.log(refreshToken)
                     
-                    res.json({message:"Login successfully"})
+                    res.json({message:"Login successfully",status:500,data:{username:user.username,profilePicture:user.avatar,accessToken}})
                 }
                 else {
                 res.json({message:"username or password is not correct"})

@@ -2,7 +2,9 @@ import { Controller, Get, Post, Req, Res } from '@nestjs/common';
 import { LikeService } from './like.service';
 import { Request, Response } from 'express';
 import { Like } from './like.entity';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('like')
 @Controller('like')
 export class LikeController {
     constructor(
@@ -11,6 +13,7 @@ export class LikeController {
 
     }
     
+    @ApiOperation({summary:"handler click 'Like' button in a post"})
     @Post()
     async like(@Req() req:Request,@Res() res:Response){
         try {
@@ -23,6 +26,7 @@ export class LikeController {
         }
     }
 
+    @ApiOperation({summary:"get all likes in a post [...,{userid,postid}] "})
     @Get('/get/:id')
     async getLikeByPost(@Req() req:Request,@Res() res:Response){
         try {

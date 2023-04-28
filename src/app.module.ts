@@ -9,13 +9,17 @@ import { JwtModule } from './modules/jwt/jwt.module';
 import { JwtService } from './modules/jwt/jwt.service';
 import { CommentModule } from './modules/comment/comment.module';
 import { LikeModule } from './modules/like/like.module';
+import { CloudinaryServiceModule } from './modules/cloudinary/cloudinary.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 
 @Module({
   imports: [
     PostgresModule.forRoot(postgresConfig),
-    UserModule, PostModule, JwtModule, CommentModule, LikeModule],
+    UserModule, PostModule, JwtModule, CommentModule, LikeModule, CloudinaryServiceModule,
+    MulterModule.register()
+  ],
   controllers: [AppController],
-  providers: [AppService, JwtService],
+  providers: [AppService, JwtService]
 })
 export class AppModule {}

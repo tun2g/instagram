@@ -35,17 +35,17 @@ export class UserService {
     
     public async createUser(user:CreateUserDto):Promise<any>{
         try {
-            let newUser:User={...user,userid:2}
+            let newUser:User={...user,userid:2,avatar:""}
             let maxId:number=await this.maxId()
             if (typeof (maxId)!== 'number' )
             {
                 maxId=0
             }
             newUser.userid=maxId+1
-
+            newUser.avatar=process.env.DEFAULT_AVATAR
             await this.pg.query(
-              'INSERT INTO users (fullname, password,username,userid)  VALUES ($1, $2,$3,$4) RETURNING *',
-              [newUser.fullname, newUser.password,newUser.username,newUser.userid],
+              'INSERT INTO users (fullname, password,username,userid,avatar)  VALUES ($1, $2,$3,$4,$5) RETURNING *',
+              [newUser.fullname, newUser.password,newUser.username,newUser.userid,newUser.avatar],
             );
             
           } catch (err) {

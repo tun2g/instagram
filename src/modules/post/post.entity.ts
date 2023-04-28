@@ -9,8 +9,8 @@ export class Posts {
   userid: number;
 
   @Column()
-  title: string;
+  description: string;  
 
   @Column()
-  content: string;  
+  imageurl: string;
 }

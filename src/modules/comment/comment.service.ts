@@ -56,7 +56,7 @@ export class CommentService {
     async getCommentsByPost(postid:number){
         try {
             const list = await this.pg.query(
-                'SELECT * FROM comments WHERE postid = $1',[postid]
+                'SELECT comments.*,users.username,users.avatar FROM comments,users WHERE postid = $1 AND comments.userid=users.userid',[postid]
             )
             return list.rows
         } catch (error) {

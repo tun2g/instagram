@@ -15,11 +15,12 @@ export class CloudinaryServiceController {
         @UploadedFile() file :Express.Multer["File"],
         @Req() req:Request,
         @Res() res:Response
-        ): Promise<string> 
+        ) 
     {
         try {
-            res.json({message:"uploaded",status:500})
-            return await this.cloudinaryService.upload(file);
+            const image= await this.cloudinaryService.upload(file);
+            console.log(image)
+            res.json({message:"uploaded",status:500,image})
             
         } catch (error) {
             console.log(error)

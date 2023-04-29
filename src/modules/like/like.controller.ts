@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Controller,UseGuards, Get, Post, Req, Res } from '@nestjs/common';
 import { LikeService } from './like.service';
 import { Request, Response } from 'express';
 import { Like } from './like.entity';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { PersonalJwtAuthGuard } from 'src/services/personaljwtauth.guard';
 
 @ApiTags('like')
 @Controller('like')
@@ -14,7 +15,7 @@ export class LikeController {
     }
     
     @ApiOperation({summary:"handler click 'Like' button in a post"})
-    @Post()
+    @Post('post/:postid')
     async like(@Req() req:Request,@Res() res:Response){
         try {
             const reqBody:Like= req.body

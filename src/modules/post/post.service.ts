@@ -17,7 +17,7 @@ export class PostService {
     async getAllPosts(){
         try {
             const list =await this.pg.query(
-                'SELECT * FROM posts'
+                'SELECT posts.*,users.username,users.avatar FROM posts,users WHERE users.userid = posts.userid'
             )
             return list.rows
         } catch (error) {

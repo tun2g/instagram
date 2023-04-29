@@ -16,7 +16,7 @@ CREATE TABLE posts(
 	postid int4 PRIMARY KEY,
 	userid int4 NOT NULL,
 	description varchar,
-	imageurl varchar(60),
+	imageurl varchar(100),
 	createdAt TIMESTAMP WITH TIME ZONE
 )
 ;

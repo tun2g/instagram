@@ -148,7 +148,15 @@ export class UserController {
                     console.log(accessToken)
                     console.log(refreshToken)
                     
-                    res.json({message:"Login successfully",status:500,data:{username:user.username,profilePicture:user.avatar,accessToken}})
+                    res.json({message:"Login successfully",status:500,
+                        data:
+                            {
+                                username:user.username,
+                                profilePicture:user.avatar,
+                                accessToken,
+                                userid:user.userid
+                            }
+                    })
                 }
                 else {
                 res.json({message:"username or password is not correct"})

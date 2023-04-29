@@ -1,5 +1,5 @@
 ### GET request to retrieve all users
-GET http://localhost:3333/users
+GET http://localhost:3333/users/all
 
 ### POST request to create a new user (register)
 POST http://localhost:3333/user/register
@@ -26,7 +26,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3333/user/get/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlhdCI6MTY4MTkxNTYzOCwiZXhwIjoxNjgxOTE3NDM4fQ.Ps-4BuXj0QzMx4opR0hpdaroc9j7Zwuf_qpsx6pAXzM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjMsImlhdCI6MTY4MjcwNjMyMSwiZXhwIjoxNjgyNzA4MTIxfQ.qWGWQNqzBZdr3XoPP690z0-ETh0fiaSLmeB7gYpheek
 
 ###
 GET http://localhost:3333/jwt/refresh
@@ -98,8 +98,23 @@ Content-Type: application/json
   "postid": 2
 }
 
+###
+GET http://localhost:3333/post/get/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlhdCI6MTY4MjcwNTYxOCwiZXhwIjoxNjgyNzA3NDE4fQ.4YOmHJr_SMK2LY8-0GMf2kY4SAKr1UUiMYMGMENObSQ
 
 
+###
+POST http://localhost:3333/like/post/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjEsImlhdCI6MTY4MjY5NDI2NSwiZXhwIjoxNjgyNjk2MDY1fQ.qln78SIfUfHAMLWIFLKAVZAo8eID9ZwsHg6b9iMSNVE
+Content-Type: application/json
+
+{
+  "userid":2,
+  "postid":1
+}
+
+###
+GET http://localhost:3333/like/get/1
 
 
 

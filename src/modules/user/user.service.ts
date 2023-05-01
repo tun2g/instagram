@@ -35,7 +35,7 @@ export class UserService {
     
     public async createUser(user:CreateUserDto):Promise<any>{
         try {
-            let newUser:User={...user,userid:2,avatar:""}
+            let newUser:User={...user,userid:2,avatar:"",description:null}
             let maxId:number=await this.maxId()
             if (typeof (maxId)!== 'number' )
             {
@@ -53,7 +53,7 @@ export class UserService {
         }
     }
 
-    public async updateUser(user:User):Promise<any>{
+    public async updatePassword(user:User):Promise<any>{
         try {
             await this.pg.query(
               `UPDATE users SET password = $1 WHERE userid = $2;`,
@@ -64,10 +64,27 @@ export class UserService {
           }
     }
 
+    public async updateInformation(userid:number,obj:Object):Promise<any>{
+        try {
+            const keys = Object.entries(obj).map(([key, value], index) => `${key}=$${index + 1}`).join(", ");
+            const values = Object.entries(obj).map(([key, value], index) => value);
+
+            values.push(Number(userid))
+            
+            const numberFields= Object.entries(obj).length
+            await this.pg.query(
+                `UPDATE users SET ${keys} WHERE userid= $${numberFields+1}`,
+                values
+            )
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     public async findUserById(id:number):Promise<any>{
         try {
             const user=await this.pg.query(
-                `SELECT * FROM users WHERE userid = $1`,
+                `SELECT users.fullname,users.avatar,users.username,users.description,users.userid FROM users WHERE userid = $1`,
             [id])
             return user.rows
         } catch (error) {
@@ -77,14 +94,25 @@ export class UserService {
 
     public async findUserByName(username:string):Promise<any>{
         try {
-            
+            const user=await this.pg.query(
+                `SELECT users.fullname,users.avatar,users.username,users.description,users.userid FROM users WHERE username = $1`,
+                [username]
+            )
+            return user.rows
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    public async findUserByNameServer(username:string):Promise<any>{
+        try {
             const user=await this.pg.query(
                 `SELECT * FROM users WHERE username = $1`,
                 [username]
             )
             return user.rows
         } catch (error) {
-            
+            console.log(error)
         }
     }
     

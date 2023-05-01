@@ -67,3 +67,4 @@ ADD CONSTRAINT comment_user_id_fkey
 FOREIGN KEY (userid)
 REFERENCES users (userid)
 
+ALTER TABLE users ADD COLUMN description varchar

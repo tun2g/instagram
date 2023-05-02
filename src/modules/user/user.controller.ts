@@ -24,7 +24,7 @@ export class UserController {
     }
 
     @ApiOperation({summary:"get all users"})
-    @Get()
+    @Get('all')
     async findAll(@Req() req:Request,@Res() res:Response){
         try {       
             const users =  await this.userService.findAll()
@@ -185,10 +185,11 @@ export class UserController {
                         data:
                             {
                                 username:user.username,
-                                profilePicture:user.avatar,
-                                accessToken,
+                                avatar:user.avatar,
+                                accessToken:accessToken,
                                 userid:user.userid,
-                                fullname:user.fullname
+                                fullname:user.fullname,
+                                description: user.description
                             }
                     })
                 }

@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS refreshtokens;
 DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS follows;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
@@ -65,6 +66,23 @@ REFERENCES posts (postid);
 ALTER TABLE comments
 ADD CONSTRAINT comment_user_id_fkey
 FOREIGN KEY (userid)
-REFERENCES users (userid)
+REFERENCES users (userid);
 
-ALTER TABLE users ADD COLUMN description varchar
+ALTER TABLE users ADD COLUMN description varchar;
+
+CREATE TABLE follows(
+	userid int4,
+	followuser int4,
+);
+
+ALTER TABLE follows
+ADD CONSTRAINT follow_user_id_fkey
+FOREIGN KEY (userid)
+REFERENCES users (userid);
+
+ALTER TABLE follows
+ADD CONSTRAINT follow_fl_user_id_fkey
+FOREIGN KEY (followuser)
+REFERENCES users (userid);
+
+

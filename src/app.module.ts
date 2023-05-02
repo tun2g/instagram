@@ -11,13 +11,15 @@ import { CommentModule } from './modules/comment/comment.module';
 import { LikeModule } from './modules/like/like.module';
 import { CloudinaryServiceModule } from './modules/cloudinary/cloudinary.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { FollowModule } from './modules/follow/follow.module';
 
 
 @Module({
   imports: [
     PostgresModule.forRoot(postgresConfig),
     UserModule, PostModule, JwtModule, CommentModule, LikeModule, CloudinaryServiceModule,
-    MulterModule.register()
+    MulterModule.register(),
+    FollowModule
   ],
   controllers: [AppController],
   providers: [AppService, JwtService]

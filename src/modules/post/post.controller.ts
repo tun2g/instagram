@@ -19,8 +19,8 @@ export class PostController extends BaseController<CreatePostDto>{
     @Get('get-post-user/:id')
     async getAllPosts(@Req() req:Request,@Res() res:Response){
         try {
-          const userid:number=parseInt(req.params.id)
-            const list =  await this.postService.getPostsByUser(userid)
+          const username:string=req.params.id
+            const list =  await this.postService.getPostsByUser(username)
             res.json({list})
         } catch (error) {
             console.log(error)

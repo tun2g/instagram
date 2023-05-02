@@ -67,10 +67,12 @@ export class PostService {
         }
     }
 
-    async getPostsByUser(userid:number){
+    async getPostsByUser(username:string){
         try {
+            const userid= await this.getIdbyUsername(username)
+
             const list =await this.pg.query(
-                'SELECT * FROM posts WHERE userid = $1',[userid]
+                'SELECT * FROM posts WHERE userid = $1',[userid.userid]
             )
             return list.rows
         } catch (error) {
@@ -78,6 +80,16 @@ export class PostService {
         }
     }
 
+    async getIdbyUsername(username:string){
+        try {
+            const user= await this.pg.query(
+                'SELECT users.userid FROM users WHERE username=  $1',[username]
+            )
+            return user.rows[0]
+        } catch (error) {
+            console.log(error)
+        }
+    }
     async delete(postid:number){
         try {
             await this.pg.query(

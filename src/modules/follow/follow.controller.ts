@@ -68,4 +68,19 @@ export class FollowController {
             console.log(error)
         }
     }
+
+    @ApiOperation({summary:"is followed"})
+    @Post('is-followed/:username')
+    async isFollowed(@Req() req: Request,@Res() res: Response,@Param('username') username:string){
+        try {
+            const followuser=await this.followService.getIdbyUsername(username)
+            const {userid} =req.body
+            console.log({userid,followuser:followuser.userid})
+            const isFollowed:boolean=await this.followService.isFollowed({userid,followuser:followuser.userid})
+            res.json({isFollowed,status:200,message:"got list"})
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
